@@ -1,0 +1,104 @@
+<!--Name: Arin Patodia-->
+<!--ICE-05-->
+<html>
+<head>
+   <meta charset = "utf-8">
+   <style type = "text/css">
+      .box { border: 1px solid black; padding: 10px }
+   </style>
+   <title>SWITCH CONTENT</title>
+   <script>
+      var asyncRequest; // variable to hold XMLHttpRequest object
+
+      // set up event handlers
+      function registerListeners()
+      {
+         var img;
+         img = document.getElementById( "minecraft" );
+         img.addEventListener( "mouseover", 
+            function() { getContent( "minecraft.html" ); }, false ); 
+         img.addEventListener( "mouseout", clearContent, false ); 
+         img = document.getElementById( "apex" );
+         img.addEventListener( "mouseover", 
+            function() { getContent( "apex.html" ); }, false ); 
+         img.addEventListener( "mouseout", clearContent, false ); 
+         img = document.getElementById( "cod" );
+         img.addEventListener( "mouseover", 
+            function() { getContent( "cod.html" ); }, false ); 
+         img.addEventListener( "mouseout", clearContent, false ); 
+         img = document.getElementById( "fortnite" );
+         img.addEventListener( "mouseover", 
+            function() { getContent( "fortnite.html" ); }, false ); 
+         img.addEventListener( "mouseout", clearContent, false ); 
+         img = document.getElementById( "ll" );
+         img.addEventListener( "mouseover", 
+            function() { getContent( "ll.html" ); }, false );
+         img.addEventListener( "mouseout", clearContent, false ); 
+         img = document.getElementById( "propnight" );
+         img.addEventListener( "mouseover", 
+            function() { getContent( "propnight.html" ); }, false ); 
+         img.addEventListener( "mouseout", clearContent, false ); 
+      } // end function registerListeners
+
+      // set up and send the asynchronous request.
+      function getContent( url )
+      {
+         // attempt to create XMLHttpRequest object and make the request
+         try
+         {
+            asyncRequest = new XMLHttpRequest(); // create request object
+
+            // register event handler
+            asyncRequest.addEventListener(
+               "readystatechange", stateChange, false); 
+            asyncRequest.open( "GET", url, true ); // prepare the request
+            asyncRequest.send( null ); // send the request
+         } // end try
+         catch ( exception )
+         {
+            alert( "Request failed." );
+         } // end catch
+      } // end function getContent
+      
+      // displays the response data on the page
+      function stateChange()
+      {
+         if ( asyncRequest.readyState == 4 && asyncRequest.status == 200 )
+         {
+            document.getElementById( "contentArea" ).innerHTML = 
+               asyncRequest.responseText; // places text in contentArea
+         } // end if
+      } // end function stateChange
+
+      // clear the content of the box
+      function clearContent()
+      {
+         document.getElementById( "contentArea" ).innerHTML = "";
+      } // end function clearContent
+
+      window.addEventListener( "load", registerListeners, false );
+   </script>
+</head>
+<body>
+   <h1>Mouse over a game for more information.</h1>
+   <img id = "minecraft" class="img" alt = "MINECRAFT"
+      src = "images/thumbs/mc.png"width="100" 
+      height="100">
+   <img id = "apex" class="img" alt = "APEX_LEGENDS"
+      src = "images/thumbs/al.jpg"width="100" 
+      height="100">
+   <img id = "cod" class="img" alt = "CALL_OF_DUTY"
+      src = "images/thumbs/cod.jpg"width="100" 
+      height="100">
+   <img id = "fn" class="img" alt = "FORTNITE"
+      src = "images/thumbs/fn.jpg"width="100" 
+      height="100">
+   <img id = "ll" class="img" alt = "LEAGUE_OF_LEGENDS" 
+      src = "images/thumbs/ll.jpg"width="100" 
+      height="100">
+   <img id = "propnight" class="img" alt = "PROPNIGHT"
+      src = "images/thumbs/pn.jpg"width="100" 
+      height="100">
+   <div class = "box" id = "contentArea"></div>
+</body>
+</html>
